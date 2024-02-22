@@ -58,8 +58,8 @@ class EnergyProcessor:
 
     def calculate_energy_demand(self, name: str) -> OrderedDict:
         """
-        Calculates the percentage of energy reduction.
-        This is calculated by dividing the reduced energy demand
+        Calculates the percentage of energy reduction,
+        this is calculated by dividing the energy output by the total demand needed
 
         Parameters:
             name (str): The name of the asset to calculate

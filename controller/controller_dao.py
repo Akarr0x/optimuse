@@ -18,7 +18,7 @@ processor = EnergyProcessor(dao)
 @app.route('/energy_demand', methods=['GET'])
 def get_energy_demand():
     """
-    API endpoint to retrieve the energy demand for a specified asset by name.
+    API GET to retrieve the energy demand for a specified asset by name.
     """
     asset_name = request.args.get('name', default=None, type=str)
 
