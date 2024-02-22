@@ -1,0 +1,186 @@
+{
+    "asset": [
+        {
+            "id": 1,
+            "name": "High Rise"
+        },
+        {
+            "id": 2,
+            "name": "Residential"
+        },
+        {
+            "id": 3,
+            "name": "School"
+        }
+    ],
+    "asset_energy_demand": [
+        {
+            "asset": 1,
+            "energy_type": 1,
+            "energy_demand": 853452
+        },
+        {
+            "asset": 1,
+            "energy_type": 2,
+            "energy_demand": 724213
+        },
+        {
+            "asset": 1,
+            "energy_type": 3,
+            "energy_demand": 554321
+        },
+        {
+            "asset": 1,
+            "energy_type": 4,
+            "energy_demand": 652134
+        },
+        {
+            "asset": 2,
+            "energy_type": 1,
+            "energy_demand": 605321
+        },
+        {
+            "asset": 2,
+            "energy_type": 2,
+            "energy_demand": 501324
+        },
+        {
+            "asset": 2,
+            "energy_type": 3,
+            "energy_demand": 409812
+        },
+        {
+            "asset": 2,
+            "energy_type": 4,
+            "energy_demand": 458231
+        },
+        {
+            "asset": 3,
+            "energy_type": 1,
+            "energy_demand": 756421
+        },
+        {
+            "asset": 3,
+            "energy_type": 2,
+            "energy_demand": 657432
+        },
+        {
+            "asset": 3,
+            "energy_type": 3,
+            "energy_demand": 612345
+        },
+        {
+            "asset": 3,
+            "energy_type": 4,
+            "energy_demand": 701234
+        }
+    ],
+    "asset_energy_output": [
+        {
+            "asset": 1,
+            "energy_output": 115432
+        },
+        {
+            "asset": 2,
+            "energy_output": 81234
+        },
+        {
+            "asset": 3,
+            "energy_output": 94123
+        }
+    ],
+    "energy_system": [
+        {
+            "id": 1,
+            "name": "electricity"
+        },
+        {
+            "id": 2,
+            "name": "district_heating"
+        },
+        {
+            "id": 3,
+            "name": "coal"
+        }
+    ],
+    "energy_type": [
+        {
+            "id": 1,
+            "name": "heat"
+        },
+        {
+            "id": 2,
+            "name": "water"
+        },
+        {
+            "id": 3,
+            "name": "light"
+        },
+        {
+            "id": 4,
+            "name": "cool"
+        }
+    ],
+    "asset_energy_system": [
+        {
+            "asset": 1,
+            "energy_system": 2,
+            "energy_type": 1
+        },
+        {
+            "asset": 1,
+            "energy_system": 3,
+            "energy_type": 2
+        },
+        {
+            "asset": 1,
+            "energy_system": 1,
+            "energy_type": 3
+        },
+        {
+            "asset": 1,
+            "energy_system": 1,
+            "energy_type": 4
+        },
+        {
+            "asset": 2,
+            "energy_system": 2,
+            "energy_type": 1
+        },
+        {
+            "asset": 2,
+            "energy_system": 2,
+            "energy_type": 2
+        },
+        {
+            "asset": 2,
+            "energy_system": 1,
+            "energy_type": 3
+        },
+        {
+            "asset": 3,
+            "energy_system": 1,
+            "energy_type": 4
+        },
+        {
+            "asset": 3,
+            "energy_system": 1,
+            "energy_type": 1
+        },
+        {
+            "asset": 3,
+            "energy_system": 1,
+            "energy_type": 2
+        },
+        {
+            "asset": 3,
+            "energy_system": 1,
+            "energy_type": 3
+        },
+        {
+            "asset": 3,
+            "energy_system": 1,
+            "energy_type": 4
+        }
+    ]
+}

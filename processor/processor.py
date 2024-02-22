@@ -12,18 +12,17 @@ class EnergyProcessor:
 
     def calculate_energy_demand_per_electricity(self):
         """
-        Calculate the energy demand for each asset, distinguishing between electricity and non-electricity sources.
+        Calculates the energy demand per each asset.
+        Divides the energy demand in "electricity" and "non-electricity" for better understanding
         """
         self.energy_demand_summary = {asset['name']: {'electricity': 0, 'non-electricity': 0} for asset in self.dao.data.get('asset', [])}
 
-        # Processing energy demand data.
         for entry in self.dao.data.get('asset_energy_system', []):
             try:
                 asset_name = entry.get('asset')
                 energy_type = entry.get('energy_type')
                 energy_system = entry.get('energy_system')
 
-                # Check for missing data and log it.
                 if None in (asset_name, energy_type, energy_system):
                     logging.warning(f"Missing data for entry: {entry}")
                     continue
@@ -44,31 +43,29 @@ class EnergyProcessor:
 
     def get_reduced_energy_demand(self):
         """
-        Calculate the reduced energy demand for each asset after accounting for energy output.
+        Calculates the reduced energy demand taking into consideration only the electricity variable.
+        If less than 0 just gives 0 as result
         """
         self.energy_demand_summary_taken_out_reduced_cost = {}
 
-        # Calculating reduced energy demand.
         for asset_name, demands in self.energy_demand_summary.items():
             output = self.dao.data['asset_energy_output'].get(asset_name, 0)
 
-            # Ensuring we don't end up with negative demand.
+            # Checks for negative demand.
             electricity_demand_after_output = max(demands['electricity'] - output, 0)
             self.energy_demand_summary_taken_out_reduced_cost[asset_name] = electricity_demand_after_output + demands[
                 'non-electricity']
 
     def calculate_energy_demand(self, name: str) -> OrderedDict:
         """
-        Calculate the energy demand and output reduction for a given asset by name.
+        Calculates the percentage of energy reduction.
+        This is calculated by dividing the reduced energy demand
 
         Parameters:
-            name (str): The name of the asset to calculate demand for.
+            name (str): The name of the asset to calculate
 
         Returns:
             OrderedDict: An ordered dictionary containing the calculated energy data.
-
-        Raises:
-            ValueError: If the total energy demand is 0, indicating no energy consumption data is available.
         """
         asset_demands = self.dao.data['asset_energy_demand'].get(name)
         if not asset_demands:
@@ -80,7 +77,16 @@ class EnergyProcessor:
             logging.error(f"Total energy demand for asset '{name}' is 0")
             raise ValueError(f"Total energy demand for asset '{name}' cannot be 0")
 
-        energy_output_reduction = self.dao.data['asset_energy_output'].get(name, 0)
+        """
+        The electricity demand may be reduced by the asset's output, but if the output exceeds the electricity demand, 
+        we select the lower of the two values. 
+        This assumes that if the output energy is greater than the electricity demand, 
+        there is no alternative use for the surplus (such as selling it).
+        """
+
+        electricity_demand = self.energy_demand_summary.get(name, {}).get('electricity', 0)
+        energy_output = self.dao.data['asset_energy_output'].get(name, 0)
+        energy_output_reduction = min(energy_output, electricity_demand)
 
         reduction_percentage = (energy_output_reduction / total_energy_demand * 100)
 

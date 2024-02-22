@@ -16,8 +16,6 @@ class LoadDataDAO:
 
     def __init__(self, file_path: str):
         """
-        Initializes the LoadDataDAO with a specified path to the JSON data file.
-
         Parameters:
             file_path (str): The path to the JSON file.
         """
@@ -66,23 +64,22 @@ class LoadDataDAO:
             asset_id = asset_energy_system.get('asset')
             es_id = asset_energy_system.get('energy_system')
             et_id = asset_energy_system.get('energy_type')
-            # If any of the IDs is None, it indicates an issue with the data.
             if asset_id is None or es_id is None or et_id is None:
                 logging.warning(f"Skipping entry due to missing data: {asset_energy_system}")
                 continue
 
+            # Ensures that asset, energy system and energy type exists
             asset_energy_system['asset'] = asset_names.get(asset_id, "Unknown Asset")
             asset_energy_system['energy_system'] = energy_system_names.get(es_id, "Unknown Energy System")
             asset_energy_system['energy_type'] = energy_type_names.get(et_id, "Unknown Energy Type")
 
-        # Process 'asset_energy_demand'
+        # Substitute asset_energy_demand
         energy_demand_dict = {}
         for item in self.data.get('asset_energy_demand', []):
             asset_id = item.get('asset')
             et_id = item.get('energy_type')
             demand = item.get('energy_demand')
 
-            # Skip entries with missing data
             if asset_id is None or et_id is None or demand is None:
                 logging.warning(f"Skipping entry due to missing data: {item}")
                 continue
@@ -90,7 +87,6 @@ class LoadDataDAO:
             asset_name = asset_names.get(asset_id, "Unknown Asset")
             energy_type = energy_type_names.get(et_id, "Unknown Energy Type")
 
-            # Initialize the asset entry if not already present
             if asset_name not in energy_demand_dict:
                 energy_demand_dict[asset_name] = {}
 
@@ -98,16 +94,15 @@ class LoadDataDAO:
 
         self.data['asset_energy_demand'] = energy_demand_dict
 
-        # Process 'asset_energy_output'
+        # Substitute asset_energy_output
         energy_output_dict = {}
         for item in self.data.get('asset_energy_output', []):
             asset_id = item.get('asset')
             output = item.get('energy_output')
 
-            # Skip entries with missing data
             if asset_id is None or output is None:
                 logging.warning(f"Skipping entry due to missing data: {item}")
-                continue  # Optionally, log this issue or raise an error
+                continue
 
             asset_name = asset_names.get(asset_id, "Unknown Asset")
             energy_output_dict[asset_name] = output
@@ -154,7 +149,7 @@ class LoadDataDAO:
         return energy_type_names.get(et_id)
 
 
-dao = LoadDataDAO("/Users/alessandrodiamanti/Downloads/json_database.json")
+dao = LoadDataDAO('../data/json_database.json')
 dao.replace_ids_with_names()
 
 processor = EnergyProcessor(dao)

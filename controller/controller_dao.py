@@ -11,7 +11,7 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 
 # Initialize DAO and Processor
-dao = LoadDataDAO("/Users/alessandrodiamanti/Downloads/json_database.json")
+dao = LoadDataDAO('../data/json_database.json')
 dao.replace_ids_with_names()
 processor = EnergyProcessor(dao)
 
@@ -22,11 +22,11 @@ def get_energy_demand():
     """
     asset_name = request.args.get('name', default=None, type=str)
 
-    if asset_name:
+    if asset_name is not None:
         asset_info = next((asset for asset in dao.data['asset'] if asset['name'].lower() == asset_name.lower()), None)
-        if asset_info:
+        if asset_info is not None:
             energy_demand_info = processor.calculate_energy_demand(asset_name)
-            json_response = json.dumps(energy_demand_info, indent=4, sort_keys=False)  # Set sort_keys to False
+            json_response = json.dumps(energy_demand_info, indent=4, sort_keys=False)
             return Response(json_response, mimetype='application/json')
         else:
             logging.error(f"Invalid asset name provided: {asset_name}")
