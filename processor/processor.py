@@ -130,10 +130,8 @@ class EnergyProcessor:
 
         for energy_type, demand in original_demands.items():
             if 'electricity' in reduced_demands and energy_type in reduced_demands['electricity']:
-                # If reduced demand exists for electricity components, use it
                 merged[energy_type] = reduced_demands['electricity'][energy_type]
             else:
-                # Otherwise, use the original demand
                 merged[energy_type] = demand
 
         return merged
@@ -149,7 +147,6 @@ class EnergyProcessor:
         Returns:
             OrderedDict: An ordered dictionary containing the calculated energy data.
         """
-        original_demands = self.dao.data['asset_energy_demand'].get(name, {})
         original_demands_for_asset = self.energy_demand_details.get(name, {})
         merged_demands = self.merge_demands(name, original_demands_for_asset)
         total_energy_demand = sum(value for value in merged_demands.values() if isinstance(value, (int, float)))
