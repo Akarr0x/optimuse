@@ -58,11 +58,11 @@ http://127.0.0.1:5000/energy_demand?name=High%20Rise
     "energy_types": {
         "heat": 853452,
         "water": 724213,
-        "light": 554321,
-        "cool": 652134
+        "light": 496605.0,
+        "cool": 594418.0
     },
-    "total_energy_demand": 2784120,
-    "energy_output_reduction": 4.14
+    "total_energy_demand": 2668688.0,
+    "energy_output_reduction": 4.1460856572274185
 }
 ```
 There are three name to chose from: 
