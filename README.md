@@ -19,7 +19,11 @@ Install the required Python packages:
 pip install -r requirements.txt
 ```
 ## Running the Application
-To run the application, go to the controller directory and execute:
+To run the application, go to the controller directory
+```
+cd controller
+```
+and execute:
 ```
 flask run 
 ```
