@@ -46,6 +46,8 @@ Retrieve the energy demand for a specific asset by name
 `name`: The name of the asset
 
 **Example Request**:
+
+Open a web browser and paste:
 ```
 http://127.0.0.1:5000/energy_demand?name=High%20Rise
 ```
@@ -63,6 +65,17 @@ http://127.0.0.1:5000/energy_demand?name=High%20Rise
     "energy_output_reduction": 4.14
 }
 ```
+There are three name to chose from: 
+
+- High Rise
+
+- Residential
+
+- School
+
+
+Any invalid asset name will result in:
+
 **Error Response**:
 ```json
 {
