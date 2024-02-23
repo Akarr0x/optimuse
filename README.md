@@ -9,19 +9,20 @@ The requirements can be found in the requirements.txt
 ## Installation
 
 Clone the repository to your local machine:
-
+```
 git clone https://github.com/Akarr0x/optimuse.git
 
 cd optimuse
-
+```
 Install the required Python packages:
-
+```
 pip install -r requirements.txt
-
+```
 ## Running the Application
 To run the application, go to the controller directory and execute:
+```
 flask run 
-
+```
 The application will run on `http://127.0.0.1:5000/`
 
 
@@ -40,8 +41,9 @@ Retrieve the energy demand for a specific asset by name
 `name`: The name of the asset
 
 **Example Request**:
-GET /energy_demand?name=High%20Rise
-
+```
+http://127.0.0.1:5000/energy_demand?name=High%20Rise
+```
 **Success Response**:
 ```json
 {
