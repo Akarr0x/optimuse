@@ -25,7 +25,8 @@ cd controller
 ```
 and execute:
 ```
-flask run 
+export FLASK_APP=controller_dao.py
+flask run
 ```
 The application will run on `http://127.0.0.1:5000/`
 
